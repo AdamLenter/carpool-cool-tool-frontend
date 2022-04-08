@@ -5,15 +5,16 @@ import { useHistory } from "react-router-dom";
 function HomeScreen() {
     const history = useHistory();
 
-    function handleLoginClick() {
-        history.push("/login");
+    function handleClick(page) {
+        console.log("yoyoyo")
+        history.push(`/${page}`);
     }
     return (
         <div className="App">
             <PreLoginHeader />
             <div>
-            <button value = "login" onClick = {handleLoginClick}>Login</button>
-            <button value = "register">Register</button>
+            <button value = "login" onClick = {()=>handleClick("login")}>Login</button>
+            <button value = "register" onClick={()=>handleClick("register")}>Register</button>
             </div>
         </div>
         );

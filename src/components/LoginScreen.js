@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 function LoginScreen({users, setLoggedInUser}) {
     const history = useHistory();
-    const [defaultUserId, setDefaultUserId] = useState("")
+    const [defaultUserId, setDefaultUserId] = useState(users[0].id)
    
     function handle_user_select(event) {
         setDefaultUserId(event.target.value)
