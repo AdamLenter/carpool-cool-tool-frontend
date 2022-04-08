@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import PreLoginHeader from './PreLoginHeader';
+import { useHistory } from 'react-router-dom';
 
 function LoginScreen({users, setLoggedInUser}) {
+    const history = useHistory();
     const [defaultUserId, setDefaultUserId] = useState("")
    
     function handle_user_select(event) {
@@ -12,6 +14,8 @@ function LoginScreen({users, setLoggedInUser}) {
         event.preventDefault();
         const userInfo = users.find((user)=>user.id == defaultUserId); 
         setLoggedInUser(userInfo);
+        console.log(userInfo);
+        history.push("/")
     }
     
     return (
