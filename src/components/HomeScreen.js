@@ -1,14 +1,10 @@
 import React from 'react';
-import logo from '../carpool_photo.jpg';
+import PreLoginHeader from './PreLoginHeader';
 
 function HomeScreen() {
-
-  
-  
   return (
   <div className="App">
-    <h1>Carpool Cool Tool</h1>
-    <img src={logo} className = "logo" alt="logo" />
+    <PreLoginHeader />
     <div>
       <button value = "login">Login</button>
       <button value = "register">Register</button>
