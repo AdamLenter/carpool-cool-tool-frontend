@@ -1,5 +1,5 @@
 import React from 'react';
-import PreLoginHeader from './PreLoginHeader';
+import StandardPageHeader from './StandardPageHeader';
 import { useHistory } from "react-router-dom";
 
 function HomeScreen() {
@@ -11,10 +11,10 @@ function HomeScreen() {
     }
     return (
         <div className="App">
-            <PreLoginHeader />
+            <StandardPageHeader />
             <div>
-            <button value = "login" onClick = {()=>handleClick("login")}>Login</button>
-            <button value = "register" onClick={()=>handleClick("register")}>Register</button>
+            <button className = "app_buttons" value = "login" onClick = {()=>handleClick("login")}>Login</button>
+            <button className = "app_buttons" value = "register" onClick={()=>handleClick("register")}>Register</button>
             </div>
         </div>
         );

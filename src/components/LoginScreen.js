@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PreLoginHeader from './PreLoginHeader';
+import StandardPageHeader from './StandardPageHeader';
 import { useHistory } from 'react-router-dom';
 
 function LoginScreen({users, setLoggedInUser}) {
@@ -20,7 +20,7 @@ function LoginScreen({users, setLoggedInUser}) {
     
     return (
     <div className = "app">
-        <PreLoginHeader />
+        <StandardPageHeader />
         <form onSubmit = {handle_submit}>
             <label>Username: </label>
             <select value = {defaultUserId} onChange={handle_user_select}>

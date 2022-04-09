@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PreLoginHeader from './PreLoginHeader';
+import StandardPageHeader from './StandardPageHeader';
 
 function RegistrationForm({cities, neighborhoods, addUser, setRegistrationComplete}) {
 
@@ -119,7 +119,7 @@ function RegistrationForm({cities, neighborhoods, addUser, setRegistrationComple
                     </>
                     ) : null
                 }
-                <button>Register</button>
+                <button className = "app_buttons" >Register</button>
             </form>
         </div>
     )

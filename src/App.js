@@ -55,7 +55,7 @@ function App() {
           <BrowserRouter>
             <NavBar setLoggedInUser = {setLoggedInUser} />
             <Route exact path="/">
-                <LoggedInUserHome />
+                <LoggedInUserHome loggedInUser = {loggedInUser} />
             </Route>
           </BrowserRouter>
         ) : (

@@ -28,7 +28,7 @@
   color: #61dafb;
 }
 
-button {
+.app_buttons {
   margin: 15px;
   padding: 10px;
   font-size: large;
@@ -46,6 +46,7 @@ label, select {
 
 label, input {
   line-height: 2;
+  padding: 10px;
 }
 
 @keyframes App-logo-spin {

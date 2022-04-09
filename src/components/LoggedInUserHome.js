@@ -1,11 +1,13 @@
 import React from 'react';
 import NavBar from './NavBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import StandardPageHeader from './StandardPageHeader';
 
-function LoggedInUserHome() {
+function LoggedInUserHome( {loggedInUser}) {
     return (
         <div className="App">
-            <h1>You're logged in!</h1>
+            <StandardPageHeader />
+            <h2>Welcome, {loggedInUser.first_name}</h2>
         </div>
         );
 }

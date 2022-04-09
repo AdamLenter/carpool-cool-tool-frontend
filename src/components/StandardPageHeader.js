@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../carpool_photo.jpg';
     
-function PreLoginHeader() {
+function StandardPageHeader() {
   return (
     <div>
         <h1>Carpool Cool Tool</h1>
@@ -11,4 +11,4 @@ function PreLoginHeader() {
   );
 }
 
-export default PreLoginHeader;
+export default StandardPageHeader;
