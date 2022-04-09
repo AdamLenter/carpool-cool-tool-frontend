@@ -5,6 +5,7 @@ import HomeScreen from './components/HomeScreen';
 import LoginScreen from './components/LoginScreen';
 import LoggedInUserHome from './components/LoggedInUserHome';
 import RegistrationScreen from './components/RegistrationScreen';
+import NavBar from './components/NavBar';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -52,8 +53,9 @@ function App() {
       <div className="App">
         {loggedInUser ? (
           <BrowserRouter>
+            <NavBar setLoggedInUser = {setLoggedInUser} />
             <Route exact path="/">
-                <LoggedInUserHome setLoggedInUser = {setLoggedInUser}/>
+                <LoggedInUserHome />
             </Route>
           </BrowserRouter>
         ) : (
