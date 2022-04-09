@@ -52,23 +52,23 @@ function App() {
       <div className="App">
         {loggedInUser ? (
           <BrowserRouter>
-              <Route exact path="/">
-                  <LoggedInUserHome />
-              </Route>
+            <Route exact path="/">
+                <LoggedInUserHome setLoggedInUser = {setLoggedInUser}/>
+            </Route>
           </BrowserRouter>
         ) : (
           <BrowserRouter>
-              <Route exact path="/">
-                  <HomeScreen />
-              </Route>
+            <Route exact path="/">
+                <HomeScreen />
+            </Route>
 
-              <Route exact path="/login">
-                  <LoginScreen users = {users} setLoggedInUser = {setLoggedInUser} />
-              </Route>
+            <Route exact path="/login">
+                <LoginScreen users = {users} setLoggedInUser = {setLoggedInUser} />
+            </Route>
 
-              <Route exact path="/register">
-                <RegistrationScreen cities = {cities} neighborhoods = {neighborhoods} addUser = {addUser}  />
-              </Route>
+            <Route exact path="/register">
+              <RegistrationScreen cities = {cities} neighborhoods = {neighborhoods} addUser = {addUser}  />
+            </Route>
 
           </BrowserRouter>
         )}
