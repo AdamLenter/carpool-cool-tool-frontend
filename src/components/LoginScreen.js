@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import StandardPageHeader from './StandardPageHeader';
 import { useHistory } from 'react-router-dom';
 
-function LoginScreen({users, setLoggedInUser}) {
+function LoginScreen({users, setLoggedIn, setLoggedInUser}) {
     const history = useHistory();
     const [defaultUserId, setDefaultUserId] = useState(users[0].id)
    
@@ -13,6 +13,7 @@ function LoginScreen({users, setLoggedInUser}) {
     function handle_submit(event) {
         event.preventDefault();
         const userInfo = users.find((user)=>user.id == defaultUserId); 
+        setLoggedIn(true);
         setLoggedInUser(userInfo);
         console.log(userInfo);
         history.push("/")

@@ -42,11 +42,16 @@ img {
 
 label, select {
   font-size: large; 
+  font-weight: bold;
 }
 
 label, input {
   line-height: 2;
   padding: 10px;
+}
+
+.wide_select {
+  width: 350px;
 }
 
 @keyframes App-logo-spin {
@@ -57,4 +62,5 @@ label, input {
     transform: rotate(360deg);
   }
 }
+
 

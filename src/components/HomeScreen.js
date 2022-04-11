@@ -6,7 +6,6 @@ function HomeScreen() {
     const history = useHistory();
 
     function handleClick(page) {
-        console.log("yoyoyo")
         history.push(`/${page}`);
     }
     return (

@@ -1,10 +1,16 @@
 import React from 'react';
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import {LinkContainer} from 'react-router-bootstrap';
+import { useHistory } from 'react-router-dom';
 
-function NavBar( {setLoggedInUser} ) {   
+function NavBar( {setLoggedIn, setLoggedInUser} ) {  
+  
+    const history = useHistory();
+
     function logout(){
+        setLoggedIn(false);
         setLoggedInUser("");
+        history.push("./");
     } 
     return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -16,7 +22,7 @@ function NavBar( {setLoggedInUser} ) {
           </Nav>
           <Nav>
             <NavDropdown title="Pooling" id="collasible-nav-dropdown">
-                <LinkContainer to="/createPool">
+                <LinkContainer to="/create_pool">
                   <NavDropdown.Item>Create a Pool</NavDropdown.Item>
                 </LinkContainer>
 
