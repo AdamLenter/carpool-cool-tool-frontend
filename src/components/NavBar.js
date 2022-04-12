@@ -36,7 +36,7 @@ function NavBar( {setLoggedIn, setLoggedInUser} ) {
                   <NavDropdown.Item>My Profile</NavDropdown.Item>
                 </LinkContainer>
 
-                <LinkContainer to="/carpool_history">
+                <LinkContainer to="/show_carpools">
                   <NavDropdown.Item>My Carpools</NavDropdown.Item>
                 </LinkContainer>
 

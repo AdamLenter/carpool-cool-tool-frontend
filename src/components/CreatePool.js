@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
     
 function CreatePool( { loggedInUser, locations, addCarpool } ) {
+    const history = useHistory();
+
     const today = new Date();
 
     const currentDate = today.toISOString().split('T')[0];
@@ -59,6 +62,8 @@ function CreatePool( { loggedInUser, locations, addCarpool } ) {
                 formDataForDb.driverUserID = loggedInUser.id;
                 
                 addCarpool(formDataForDb);
+
+                history.push("/show_carpools");
                 }
             }
         }

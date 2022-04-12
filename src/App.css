@@ -54,6 +54,15 @@ label, input {
   width: 350px;
 }
 
+.carpool_div {
+  border: solid black 1px;
+  padding: 10px;
+  width: 350px;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

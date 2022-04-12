@@ -7,6 +7,7 @@ import LoggedInUserHome from './components/LoggedInUserHome';
 import RegistrationScreen from './components/RegistrationScreen';
 import NavBar from './components/NavBar';
 import CreatePool from './components/CreatePool';
+import ShowCarpools from './components/ShowCarpools';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -29,6 +30,8 @@ function App() {
   const [cities, setCities] = useState([]);
   const [locations, setLocations] = useState([]);
   const [locationsSet, setLocationsSet] = useState(false);
+  const [carpoolsAsDriver, setCarpoolsAsDriver] = useState([]);
+  const [carpoolsAsDriverLoaded, setCarpoolsAsDriverLoaded] = useState(false);
 
   useEffect(()=> {
     fetch("http://localhost:9292/users")
@@ -76,7 +79,17 @@ function App() {
       body: JSON.stringify(carpoolInfo)
       })
       .then((response)=>response.json())
-      .then((dbResponse)=>console.log(dbResponse));
+      .then((responseInfo)=> {
+        const newCarpoolsAsDriver = [...carpoolsAsDriver, responseInfo];
+        setCarpoolsAsDriver(newCarpoolsAsDriver);
+      });
+  }
+
+  function getCarpoolsAsDriver(userId) {
+    fetch(`http://localhost:9292/carpools_as_driver/${userId}`)
+        .then((r)=>r.json())
+        .then((carpoolList) => setCarpoolsAsDriver(carpoolList))
+        .then(()=>setCarpoolsAsDriverLoaded(true))
   }
 
   let neighborhoods = [];
@@ -109,12 +122,16 @@ function App() {
                 <LoggedInUserHome loggedInUser = {loggedInUser} />
             </Route>
 
-            <Route exact path="/create_pool">
+            <Route path="/create_pool">
                 <CreatePool loggedInUser = {loggedInUser} locations = {displayedLocations} addCarpool = {addCarpool} />
             </Route>
 
-            <Route exact path="/show_carpool_as_user">
-                <CreatePool loggedInUser = {loggedInUser} locations = {displayedLocations} addCarpool = {addCarpool} />
+            <Route path="/show_carpools">
+                <ShowCarpools carpoolsAsDriver = {carpoolsAsDriver} />
+            </Route>
+
+            <Route path="/show_carpool_detials">
+                <h1>YoYoYo</h1>
             </Route>
 
           </BrowserRouter>
@@ -124,7 +141,7 @@ function App() {
                 <HomeScreen />
             </Route>
             <Route exact path="/login">
-                <LoginScreen users = {users} setLoggedIn = {setLoggedIn} setLoggedInUser = {setLoggedInUser} />
+                <LoginScreen users = {users} setLoggedIn = {setLoggedIn} setLoggedInUser = {setLoggedInUser} getCarpoolsAsDriver = {getCarpoolsAsDriver} />
             </Route>
 
             <Route exact path="/register">
