@@ -8,6 +8,7 @@ import RegistrationScreen from './components/RegistrationScreen';
 import NavBar from './components/NavBar';
 import CreatePool from './components/CreatePool';
 import ShowCarpools from './components/ShowCarpools';
+import CarpoolDetails from './components/CarpoolDetails';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -32,6 +33,45 @@ function App() {
   const [locationsSet, setLocationsSet] = useState(false);
   const [carpoolsAsDriver, setCarpoolsAsDriver] = useState([]);
   const [carpoolsAsDriverLoaded, setCarpoolsAsDriverLoaded] = useState(false);
+
+  function displayDate(date, nameOrAbbreviation) {
+    const months = [
+        {"number": "01", "name": "January", "abbreviation": "Jan"},   
+        {"number": "02", "name": "February", "abbreviation": "Feb"},   
+        {"number": "03", "name": "March",  "abbreviation": "Mar"},   
+        {"number": "04", "name": "April",  "abbreviation": "Apr"},   
+        {"number": "05", "name": "May",  "abbreviation": "May"},   
+        {"number": "06", "name": "June",  "abbreviation": "Jun"},   
+        {"number": "07", "name": "July",  "abbreviation": "Jul"},   
+        {"number": "08", "name": "August",  "abbreviation": "Aug"},   
+        {"number": "09", "name": "September",  "abbreviation": "Sep"},   
+        {"number": "10", "name": "October",  "abbreviation": "Oct"},   
+        {"number": "11", "name": "November",  "abbreviation": "Nov"},   
+        {"number": "12", "name": "December",  "abbreviation": "Dec"}
+    ];
+
+    const monthInfo = months.find((month) => month.number == date.substring(5, 7));
+    
+    if(nameOrAbbreviation == "name") {
+        return `${monthInfo.name}  ${Number(date.substring(8))}, ${date.substring(0, 4)}`;
+    }
+    else {
+        return `${monthInfo.abbreviation}  ${Number(date.substring(8))}, ${date.substring(0, 4)}`
+    }
+  }
+
+function displayTime(time) {
+    let hour = Number(time.substring(11, 13));
+    let amPm
+    if(hour > 12) {
+        hour -= 12;
+        amPm = "PM";
+    }
+    else {
+        amPm = "AM";
+    }
+  return `${hour}:${time.substring(14, 16)} ${amPm}`;
+  }
 
   useEffect(()=> {
     fetch("http://localhost:9292/users")
@@ -127,11 +167,11 @@ function App() {
             </Route>
 
             <Route path="/show_carpools">
-                <ShowCarpools carpoolsAsDriver = {carpoolsAsDriver} />
+                <ShowCarpools carpoolsAsDriver = {carpoolsAsDriver} displayDate = {displayDate} displayTime = {displayTime} />
             </Route>
 
-            <Route path="/show_carpool_detials">
-                <h1>YoYoYo</h1>
+            <Route path="/show_carpool_details/:id">
+                <CarpoolDetails carpools = {carpoolsAsDriver} displayDate = {displayDate} displayTime = {displayTime} />
             </Route>
 
           </BrowserRouter>

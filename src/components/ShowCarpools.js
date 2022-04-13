@@ -1,10 +1,9 @@
 import React from 'react';
 import CarpoolCard from './CarpoolCard';
 
-function ShowCarpools({ carpoolsAsDriver }) {
+function ShowCarpools({ carpoolsAsDriver, displayDate, displayTime }) {
 
     const displayedCarpools = [...carpoolsAsDriver];
-    console.log(carpoolsAsDriver);
 
     const sortedCarpools = displayedCarpools.sort((a, b)=> {
         if(a.carpool_date.concat(" ", a.departure_time) > b.carpool_date.concat(" ", b.departure_time)){
@@ -15,12 +14,10 @@ function ShowCarpools({ carpoolsAsDriver }) {
         }
       }
       )
-
-      console.log(sortedCarpools);
     return (
         <div>
             <h2>My Carpools</h2>
-            {sortedCarpools ? sortedCarpools.map((carpool)=><CarpoolCard key = {carpool.id} carpoolInfo = {carpool} />) : <p>Loading...</p>}
+            {sortedCarpools ? sortedCarpools.map((carpool)=><CarpoolCard key = {carpool.id} carpoolInfo = {carpool} displayDate = {displayDate} displayTime = {displayTime} />) : <p>Loading...</p>}
         </div>
     )
 }
