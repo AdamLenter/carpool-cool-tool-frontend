@@ -26,7 +26,7 @@ function NavBar( {setLoggedIn, setLoggedInUser} ) {
                   <NavDropdown.Item>Create a Pool</NavDropdown.Item>
                 </LinkContainer>
 
-                <LinkContainer to="/findPool">
+                <LinkContainer to="/display_find_carpool_form">
                   <NavDropdown.Item>Find a Pool</NavDropdown.Item>
                 </LinkContainer>
             </NavDropdown>

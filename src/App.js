@@ -9,6 +9,7 @@ import NavBar from './components/NavBar';
 import CreatePool from './components/CreatePool';
 import ShowCarpools from './components/ShowCarpools';
 import CarpoolDetails from './components/CarpoolDetails';
+import FindCarpoolForm from './components/FindCarpoolForm';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -120,11 +121,20 @@ function displayTime(time) {
       })
       .then((response)=>response.json())
       .then((responseInfo)=> {
+        let newCarpool = responseInfo;
+        newCarpool.carpool_guests = [];
+        newCarpool.destination_location = locations.find((location) => location.id == newCarpool.destination_location_id);
+        newCarpool.origin_location = locations.find((location) => location.id == newCarpool.origin_location_id);
+        newCarpool.user_transactions = [];
+        newCarpool.users = [];
+
+
+
         const newCarpoolsAsDriver = [...carpoolsAsDriver, responseInfo];
         setCarpoolsAsDriver(newCarpoolsAsDriver);
-      });
+      })
   }
-
+console.log(carpoolsAsDriver);
   function getCarpoolsAsDriver(userId) {
     fetch(`http://localhost:9292/carpools_as_driver/${userId}`)
         .then((r)=>r.json())
@@ -168,6 +178,10 @@ function displayTime(time) {
 
             <Route path="/show_carpools">
                 <ShowCarpools carpoolsAsDriver = {carpoolsAsDriver} displayDate = {displayDate} displayTime = {displayTime} />
+            </Route>
+
+            <Route path="/display_find_carpool_form">
+                <FindCarpoolForm loggedInUser = {loggedInUser} locations = {sortedLocations} displayDate = {displayDate} displayTime = {displayTime} />
             </Route>
 
             <Route path="/show_carpool_details/:id">

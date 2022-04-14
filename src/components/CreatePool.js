@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import InputDateOriginDestination from './InputDateOriginDestination';
     
 function CreatePool( { loggedInUser, locations, addCarpool } ) {
     const history = useHistory();
-
     const today = new Date();
 
     const currentDate = today.toISOString().split('T')[0];
@@ -39,7 +39,7 @@ function CreatePool( { loggedInUser, locations, addCarpool } ) {
         newData[event.target.name] = event.target.value; 
         setFormData(newData); 
     }
-
+    
     function submitForm(event) {
         event.preventDefault();
         
@@ -72,26 +72,12 @@ function CreatePool( { loggedInUser, locations, addCarpool } ) {
     <div>
         <h1>Create a Carpool</h1>
         <form onSubmit = {submitForm}>
-            <label>Date: </label>
-            <input type = "date" name = "date" value = {formData.date} onChange = {updateFormData} />
-            <br />
+            <InputDateOriginDestination formData = {formData} updateFormData = {updateFormData} locations = {locations}  />
 
             <label>Departure Time: </label>
             <input type = "time" name = "time" value = {formData.time} onChange = {updateFormData} />
             <br />
-
-            <label>Origin: </label>
-            <input className = "wide_select" name = "originLocation" list = "locations" value = {formData.originLocation} onChange = {updateFormData}/>
-            <br />
-
-            <label>Destination: </label>
-            <input className = "wide_select" name = "destinationLocation" list = "locations" value = {formData.destinationLocation} onChange = {updateFormData} />
-            <br />
-
-            <datalist id = "locations">
-                {locations.map((location)=><option key = {location.id}>{location.name}</option>) }
-            </datalist>
-
+            
             <label>Guest capacity: </label>
             <input name = "carGuestCapacity" value={formData.carGuestCapacity} onChange = {updateFormData} />
             <br />
