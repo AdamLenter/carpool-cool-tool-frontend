@@ -32,7 +32,7 @@ function FindCarpoolForm({ currentDate, currentTime, loggedInUser, locations, di
         const originLocationId = locations.find((location)=>location.name == formData.originLocation).id;
         const destinationLocationId = locations.find((location)=>location.name == formData.destinationLocation).id;
         setTargetDateTime(new Date(`${formData.date} ${formData.time}`));
-        fetch(`http://localhost:9292/find_carpools/${date}/${originLocationId}/${destinationLocationId}`)
+        fetch(`http://localhost:9292/find_carpools/${loggedInUser.id}/${date}/${originLocationId}/${destinationLocationId}`)
         .then((r)=>r.json())
         .then((carpools) => setAvailableCarpools(carpools))
         .then (()=>setSubmittedParameters(formData));                

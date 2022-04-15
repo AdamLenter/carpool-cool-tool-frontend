@@ -10,6 +10,7 @@ function AvailableCarpoolCard({ carpoolInfo, loggedInUser, displayDate, displayT
         addUserToCarpool(loggedInUser.id, carpoolInfo.id);
     }
 
+    console.log(carpoolInfo.driver_user_id != loggedInUser.id);
     return (
         <div className = "carpool_div">
             <strong>Driver: </strong>{carpoolInfo.driver_user.first_name} {carpoolInfo.driver_user.last_name}
@@ -23,7 +24,10 @@ function AvailableCarpoolCard({ carpoolInfo, loggedInUser, displayDate, displayT
             <strong>Current passengers: </strong>{carpoolInfo.users.length} of {carpoolInfo.number_of_guests_available}
             <br />
             {carpoolInfo.users.length > 0 ? <AvailableCarpoolGuestList carpoolInfo = {carpoolInfo} /> : null}
-            <button className='app_buttons' onClick={handleJoinButton}>Join Carpool</button>
+            
+            {carpoolInfo.driver_user_id != loggedInUser.id ? <button className='app_buttons' onClick={handleJoinButton}>Join Carpool</button> : null}
+
+            {/* carpoolInfo.users.length < carpoolInfo.number_of_guests_available */}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import CarpoolGuest from './CarpoolGuest';
+import AvailableCarpoolGuestName from './AvailableCarpoolGuestName.js';
 
 function AvailableCarpoolGuestList({ carpoolInfo }) {
     console.log(carpoolInfo.users);
@@ -8,12 +8,7 @@ function AvailableCarpoolGuestList({ carpoolInfo }) {
             <br />
             <strong>Current Passenger List:</strong>
             <br />
-            {carpoolInfo.users.map((guest) => (
-                <>
-                    <strong>Name: </strong>{guest.first_name} {guest.last_name}
-                    <br />
-                </>
-            ))}
+            {carpoolInfo.users.map((guest) => <AvailableCarpoolGuestName key = {guest.id} guest = {guest} />)}
         </div>
     )
 }
