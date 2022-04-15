@@ -2,31 +2,14 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import InputDateOriginDestination from './InputDateOriginDestination';
     
-function CreatePool( { loggedInUser, locations, addCarpool } ) {
+function CreatePool( { currentDate, currentTime, loggedInUser, locations, addCarpool } ) {
     const history = useHistory();
-    const today = new Date();
-
-    const currentDate = today.toISOString().split('T')[0];
-    let currentHour = today.getHours();
-
-    if(currentHour < 23) {
-        currentHour += 1;
-    }
-    else {
-        currentHour = 0;
-    }
-
-    if(currentHour < 10) {
-        currentHour = "0" + currentHour;
-    }
-
-    const time = currentHour + ":00";
  
     const defaultNeighborhoodLocation = locations.find((location)=>location.id == loggedInUser.home_neighborhood_location_id).name;
     
     const defaultFormValues = {
         date: currentDate,
-        time: time, 
+        time: currentTime, 
         originLocation: defaultNeighborhoodLocation, 
         destinationLocation: "", 
         carGuestCapacity: loggedInUser.hasCar == "yes" ? loggedInUser.carGuestCapacity : 0, 
@@ -73,10 +56,6 @@ function CreatePool( { loggedInUser, locations, addCarpool } ) {
         <h1>Create a Carpool</h1>
         <form onSubmit = {submitForm}>
             <InputDateOriginDestination formData = {formData} updateFormData = {updateFormData} locations = {locations}  />
-
-            <label>Departure Time: </label>
-            <input type = "time" name = "time" value = {formData.time} onChange = {updateFormData} />
-            <br />
             
             <label>Guest capacity: </label>
             <input name = "carGuestCapacity" value={formData.carGuestCapacity} onChange = {updateFormData} />

@@ -26,6 +26,10 @@ function InputDateOriginDestination( { formData,  updateFormData, locations } ) 
         <input type = "date" name = "date" value = {formData.date} onChange = {updateFormData} />
         <br />
 
+        <label>Departure Time: </label>
+            <input type = "time" name = "time" value = {formData.time} onChange = {updateFormData} />
+        <br />
+
         <label>Origin: </label>
         <input className = "wide_select" name = "originLocation" list = "locations" value = {formData.originLocation} onChange = {updateFormData}/>
         <br />

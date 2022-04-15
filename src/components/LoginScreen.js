@@ -16,7 +16,6 @@ function LoginScreen({users, setLoggedIn, setLoggedInUser, getCarpoolsAsDriver})
         setLoggedIn(true);
         setLoggedInUser(userInfo);
         getCarpoolsAsDriver(selectedUserId)
-        console.log(userInfo);
         history.push("/")
     }
     

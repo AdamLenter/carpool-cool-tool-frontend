@@ -1,7 +1,6 @@
 import React from 'react';
 
 function CarpoolGuest({ carpoolGuest, carpoolGuestUsers, userTransactions, displayDate }) {
-    console.log(carpoolGuest);
 
     const guestUserInfo = carpoolGuestUsers.find((user)=>user.id == carpoolGuest.user_id);
     let transactionInfo;
@@ -9,7 +8,6 @@ function CarpoolGuest({ carpoolGuest, carpoolGuestUsers, userTransactions, displ
         transactionInfo = userTransactions.find((transaction) => transaction.carpool_guest_id == carpoolGuest.id);
     } 
 
-    console.log(transactionInfo);
     return (
         <div>
             <strong>Name: </strong>{guestUserInfo.first_name} {guestUserInfo.last_name}

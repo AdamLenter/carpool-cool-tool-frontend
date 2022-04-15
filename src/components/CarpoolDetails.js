@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CarpoolBasicInfo from './CarpoolBasicInfo';
 import CarpoolGuestList from './CarpoolGuestList';
 
-function CarpoolDetails( { carpools, displayDate, displayTime } ) {
+function CarpoolDetails( { displayDate, displayTime } ) {
     
     const params = useParams();
-    const carpoolInfo = carpools.find((carpool)=>carpool.id == params.id);
+    const [carpoolInfo, setCarpoolInfo] = useState({});
+    const [carpoolLoaded, setCarpoolLoaded] = useState(false);
 
-    console.log(carpoolInfo);
+    useEffect(()=> {
+        fetch(`http://localhost:9292/carpool/${params.id}`)
+            .then((r)=>r.json())
+            .then((carpool) => setCarpoolInfo(carpool))
+            .then(()=>setCarpoolLoaded(true))
+            }, [])
 
-    const totalOccupants = carpoolInfo.users.length + 1;
-    const pricePerOccupant = (carpoolInfo.one_way_cost/totalOccupants);
-
-    if(carpoolInfo) {
+    if(carpoolLoaded) {
+        const totalOccupants = carpoolInfo.users.length + 1;
+        const pricePerOccupant = (carpoolInfo.one_way_cost/totalOccupants);
         return (
             <div>
                 <h1>Carpool Details</h1>

@@ -12,6 +12,24 @@ import CarpoolDetails from './components/CarpoolDetails';
 import FindCarpoolForm from './components/FindCarpoolForm';
 
 function App() {
+  const today = new Date();
+
+  const currentDate = today.toISOString().split('T')[0];
+  let currentHour = today.getHours();
+
+  if(currentHour < 23) {
+      currentHour += 1;
+  }
+  else {
+      currentHour = 0;
+  }
+
+  if(currentHour < 10) {
+      currentHour = "0" + currentHour;
+  }
+
+  const currentTime = currentHour + ":00";
+
   const [users, setUsers] = useState([]);
   const [usersLoaded, setUsersLoaded] = useState(false);
   // const [loggedInUser, setLoggedInUser] = useState({address1: "4245 Wisozk Roads", 
@@ -134,7 +152,7 @@ function displayTime(time) {
         setCarpoolsAsDriver(newCarpoolsAsDriver);
       })
   }
-console.log(carpoolsAsDriver);
+  
   function getCarpoolsAsDriver(userId) {
     fetch(`http://localhost:9292/carpools_as_driver/${userId}`)
         .then((r)=>r.json())
@@ -173,7 +191,7 @@ console.log(carpoolsAsDriver);
             </Route>
 
             <Route path="/create_pool">
-                <CreatePool loggedInUser = {loggedInUser} locations = {displayedLocations} addCarpool = {addCarpool} />
+                <CreatePool currentDate = {currentDate} currentTime = {currentTime} loggedInUser = {loggedInUser} locations = {displayedLocations} addCarpool = {addCarpool} />
             </Route>
 
             <Route path="/show_carpools">
@@ -181,11 +199,11 @@ console.log(carpoolsAsDriver);
             </Route>
 
             <Route path="/display_find_carpool_form">
-                <FindCarpoolForm loggedInUser = {loggedInUser} locations = {sortedLocations} displayDate = {displayDate} displayTime = {displayTime} />
+                <FindCarpoolForm currentDate = {currentDate} currentTime = {currentTime} loggedInUser = {loggedInUser} locations = {displayedLocations} displayDate = {displayDate} displayTime = {displayTime} />
             </Route>
 
             <Route path="/show_carpool_details/:id">
-                <CarpoolDetails carpools = {carpoolsAsDriver} displayDate = {displayDate} displayTime = {displayTime} />
+                <CarpoolDetails displayDate = {displayDate} displayTime = {displayTime} />
             </Route>
 
           </BrowserRouter>
