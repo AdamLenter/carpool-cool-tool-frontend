@@ -6,7 +6,7 @@ function AvailableCarpoolGuestList({ carpoolInfo }) {
     return (
         <div>
             <br />
-            <strong>Current Guests:</strong>
+            <strong>Current Passenger List:</strong>
             <br />
             {carpoolInfo.users.map((guest) => (
                 <>

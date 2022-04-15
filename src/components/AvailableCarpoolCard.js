@@ -2,13 +2,14 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import AvailableCarpoolGuestList from './AvailableCarpoolGuestList';
 
-function AvailableCarpoolCard({ carpoolInfo, displayDate, displayTime }) {
-    console.log(carpoolInfo);
+function AvailableCarpoolCard({ carpoolInfo, loggedInUser, displayDate, displayTime, addUserToCarpool }) {
+
     const history = useHistory();
     
     function handleJoinButton() {
-        history.push(`/show_carpool_details/${carpoolInfo.id}`);
+        addUserToCarpool(loggedInUser.id, carpoolInfo.id);
     }
+
     return (
         <div className = "carpool_div">
             <strong>Driver: </strong>{carpoolInfo.driver_user.first_name} {carpoolInfo.driver_user.last_name}

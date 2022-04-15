@@ -160,6 +160,17 @@ function displayTime(time) {
         .then(()=>setCarpoolsAsDriverLoaded(true))
   }
 
+  function addUserToCarpool(userId, carpoolId) {
+    fetch("http://localhost:9292/carpool_guests", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        },
+      body: JSON.stringify({userId, carpoolId})
+      })
+      .then((response)=>response.json())
+  }
+
   let neighborhoods = [];
   
   if(locationsSet) {
@@ -199,7 +210,7 @@ function displayTime(time) {
             </Route>
 
             <Route path="/display_find_carpool_form">
-                <FindCarpoolForm currentDate = {currentDate} currentTime = {currentTime} loggedInUser = {loggedInUser} locations = {displayedLocations} displayDate = {displayDate} displayTime = {displayTime} />
+                <FindCarpoolForm currentDate = {currentDate} currentTime = {currentTime} loggedInUser = {loggedInUser} locations = {displayedLocations} displayDate = {displayDate} displayTime = {displayTime} addUserToCarpool = {addUserToCarpool} />
             </Route>
 
             <Route path="/show_carpool_details/:id">

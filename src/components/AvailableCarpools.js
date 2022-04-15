@@ -1,7 +1,7 @@
 import React from 'react';
 import AvailableCarpoolCard from './AvailableCarpoolCard';
 
-function AvailableCarpools({ carpools, submittedParameters, displayDate, displayTime }) {
+function AvailableCarpools({ carpools, loggedInUser, submittedParameters, displayDate, displayTime, addUserToCarpool }) {
     return (
         <div>
             <h1>Available Carpools</h1>
@@ -12,7 +12,7 @@ function AvailableCarpools({ carpools, submittedParameters, displayDate, display
                 <br />
 
             </p>
-                {carpools.length > 0 ? carpools.map((carpool)=><AvailableCarpoolCard key = {carpool.id} carpoolInfo = {carpool} displayDate = {displayDate} displayTime = {displayTime} />) : <h2>(no matching carpools)</h2>}
+                {carpools.length > 0 ? carpools.map((carpool)=><AvailableCarpoolCard key = {carpool.id} carpoolInfo = {carpool} loggedInUser = {loggedInUser} displayDate = {displayDate} displayTime = {displayTime} addUserToCarpool = {addUserToCarpool} />) : <h2>(no matching carpools)</h2>}
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AvailableCarpools from './AvailableCarpools';
 import InputDateOriginDestination from './InputDateOriginDestination';
 
-function FindCarpoolForm({ currentDate, currentTime, loggedInUser, locations, displayDate, displayTime }) {
+function FindCarpoolForm({ currentDate, currentTime, loggedInUser, locations, displayDate, displayTime, addUserToCarpool}) {
 
     // const defaultNeighborhoodLocation = locations.find((location)=>location.id == loggedInUser.home_neighborhood_location_id).name;
     const defaultNeighborhoodLocation = "";
@@ -56,7 +56,7 @@ function FindCarpoolForm({ currentDate, currentTime, loggedInUser, locations, di
             </form>
             <hr />
 
-            {submittedParameters ? <AvailableCarpools carpools = {filteredCarpools} submittedParameters = {submittedParameters} displayDate = {displayDate} displayTime = {displayTime}/> : null}
+            {submittedParameters ? <AvailableCarpools carpools = {filteredCarpools} loggedInUser = {loggedInUser} submittedParameters = {submittedParameters} displayDate = {displayDate} displayTime = {displayTime} addUserToCarpool = {addUserToCarpool} /> : null}
             
         </div>
     )
