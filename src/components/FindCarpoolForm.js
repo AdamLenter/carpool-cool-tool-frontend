@@ -38,13 +38,27 @@ function FindCarpoolForm({ currentDate, currentTime, loggedInUser, locations, di
         .then (()=>setSubmittedParameters(formData));                
     }
 
+    // Look for carpools that are within 30 mins +/- of the requested time.
     let filteredCarpools = [];
+    let displayedCarpools = [];
     if(availableCarpools) {
         filteredCarpools = availableCarpools.filter((carpool) => {
             const carpoolDateTime = new Date(`${carpool.carpool_date} ${carpool.departure_time.substring(11, 16)}`);
             const diff = Math.abs(targetDateTime - carpoolDateTime);
             return diff <= 1800000;
         })
+
+    if(filteredCarpools)
+        {
+        displayedCarpools = filteredCarpools.filter((carpool)=>{
+            if(carpool.users.find((user)=>user.id == loggedInUser.id)){
+                return false;
+            }
+            else {
+                return true;
+            }
+        })
+        }
     }
     
     return (
@@ -56,7 +70,7 @@ function FindCarpoolForm({ currentDate, currentTime, loggedInUser, locations, di
             </form>
             <hr />
 
-            {submittedParameters ? <AvailableCarpools carpools = {filteredCarpools} loggedInUser = {loggedInUser} submittedParameters = {submittedParameters} displayDate = {displayDate} displayTime = {displayTime} addUserToCarpool = {addUserToCarpool} /> : null}
+            {submittedParameters ? <AvailableCarpools carpools = {displayedCarpools} loggedInUser = {loggedInUser} submittedParameters = {submittedParameters} displayDate = {displayDate} displayTime = {displayTime} addUserToCarpool = {addUserToCarpool} /> : null}
             
         </div>
     )

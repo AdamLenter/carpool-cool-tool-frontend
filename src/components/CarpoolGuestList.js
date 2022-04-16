@@ -2,7 +2,6 @@ import React from 'react';
 import CarpoolGuest from './CarpoolGuest';
 
 function CarpoolGuestList({ carpoolGuests, carpoolGuestUsers, userTransactions, displayDate }) {
-    console.log(userTransactions);
     return (
         <div>
             <br />

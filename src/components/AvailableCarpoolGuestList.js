@@ -2,7 +2,6 @@ import React from 'react';
 import AvailableCarpoolGuestName from './AvailableCarpoolGuestName.js';
 
 function AvailableCarpoolGuestList({ carpoolInfo }) {
-    console.log(carpoolInfo.users);
     return (
         <div>
             <br />
