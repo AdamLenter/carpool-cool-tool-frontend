@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import CarpoolBasicInfo from './CarpoolBasicInfo';
 
-function CarpoolCard({ carpoolInfo, displayDate, displayTime }) {
+function CarpoolCard({ loggedInUser, carpoolInfo, displayDate, displayTime }) {
     const history = useHistory();
     
     function handleDetailsButton() {
@@ -10,7 +10,7 @@ function CarpoolCard({ carpoolInfo, displayDate, displayTime }) {
     }
     return (
         <div className = "carpool_div">
-            <CarpoolBasicInfo carpoolInfo = {carpoolInfo} displayDate = {displayDate} displayTime = {displayTime} />
+            <CarpoolBasicInfo loggedInUser = {loggedInUser} carpoolInfo = {carpoolInfo} displayDate = {displayDate} displayTime = {displayTime} />
             <br />
             <button className='app_buttons' onClick={handleDetailsButton}>See details</button>
         </div>

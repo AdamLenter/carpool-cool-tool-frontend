@@ -3,18 +3,27 @@ import { useParams } from 'react-router-dom';
 import CarpoolBasicInfo from './CarpoolBasicInfo';
 import CarpoolGuestList from './CarpoolGuestList';
 
-function CarpoolDetails( { displayDate, displayTime } ) {
-    
+function CarpoolDetails( { loggedInUser, myCarpools, displayDate, displayTime } ) {
     const params = useParams();
     const [carpoolInfo, setCarpoolInfo] = useState({});
     const [carpoolLoaded, setCarpoolLoaded] = useState(false);
 
-    useEffect(()=> {
-        fetch(`http://localhost:9292/carpool/${params.id}`)
-            .then((r)=>r.json())
-            .then((carpool) => setCarpoolInfo(carpool))
-            .then(()=>setCarpoolLoaded(true))
-            }, [])
+    let carpoolToFind = {};
+    
+    if(!carpoolLoaded) {
+        carpoolToFind = myCarpools.find((carpool) => carpool.id === params.id)
+        if(carpoolToFind) {
+            setCarpoolInfo(carpoolToFind);
+            setCarpoolLoaded(true);
+        }
+        else {
+            fetch(`http://localhost:9292/carpool/${params.id}`)
+                .then((r)=>r.json())
+                .then((carpool) => setCarpoolInfo(carpool))
+                .then(()=>setCarpoolLoaded(true))
+            }
+    }
+        
 
     if(carpoolLoaded) {
         const totalOccupants = carpoolInfo.users.length + 1;
@@ -22,7 +31,7 @@ function CarpoolDetails( { displayDate, displayTime } ) {
         return (
             <div>
                 <h1>Carpool Details</h1>
-                {carpoolInfo ? <CarpoolBasicInfo carpoolInfo = {carpoolInfo} displayDate = {displayDate} displayTime = {displayTime} /> : <h2>No Carpool to Display</h2>}
+                {carpoolInfo ? <CarpoolBasicInfo loggedInUser = {loggedInUser} carpoolInfo = {carpoolInfo} displayDate = {displayDate} displayTime = {displayTime} /> : <h2>No Carpool to Display</h2>}
                 <br />
                 <br />
                 <strong>One-way cost: </strong>${carpoolInfo.one_way_cost.toFixed(2)}

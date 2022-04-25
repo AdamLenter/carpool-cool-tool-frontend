@@ -50,8 +50,6 @@ function App() {
   const [cities, setCities] = useState([]);
   const [locations, setLocations] = useState([]);
   const [locationsSet, setLocationsSet] = useState(false);
-  const [carpoolsAsDriver, setCarpoolsAsDriver] = useState([]);
-  const [carpoolsAsDriverLoaded, setCarpoolsAsDriverLoaded] = useState(false);
 
   function displayDate(date, nameOrAbbreviation) {
     const months = [
@@ -116,6 +114,9 @@ function displayTime(time) {
       newUserInfo['address2'] = null;
       }
 
+    newUserInfo['carpools_as_driver'] = [];
+    newUserInfo['carpools_as_passenger'] = [];
+
     fetch("http://localhost:9292/users", {
       method: "POST",
       headers: {
@@ -145,19 +146,7 @@ function displayTime(time) {
         newCarpool.origin_location = locations.find((location) => location.id == newCarpool.origin_location_id);
         newCarpool.user_transactions = [];
         newCarpool.users = [];
-
-
-
-        const newCarpoolsAsDriver = [...carpoolsAsDriver, responseInfo];
-        setCarpoolsAsDriver(newCarpoolsAsDriver);
       })
-  }
-  
-  function getCarpoolsAsDriver(userId) {
-    fetch(`http://localhost:9292/carpools_as_driver/${userId}`)
-        .then((r)=>r.json())
-        .then((carpoolList) => setCarpoolsAsDriver(carpoolList))
-        .then(()=>setCarpoolsAsDriverLoaded(true))
   }
 
   function addUserToCarpool(userId, carpoolId) {
@@ -170,7 +159,7 @@ function displayTime(time) {
       })
       .then((response)=>response.json())
   }
-
+  
   let neighborhoods = [];
   
   if(locationsSet) {
@@ -191,6 +180,23 @@ function displayTime(time) {
     name: `${location.city.name} - ${location.name}`
   }});
   
+  let unsortedCarpools = [];
+  let myCarpools = [];
+  
+  if(Object.keys(loggedInUser).length > 0) {
+    unsortedCarpools = [...loggedInUser.carpools_as_driver, ...loggedInUser.carpools_as_guest];
+    myCarpools = unsortedCarpools.sort((a, b)=> {
+      if(a.carpool_date.concat(" ", a.departure_time)  > b.carpool_date.concat(" ", b.departure_time)) {
+        return -1;
+        }
+      else {
+        return 1;
+      }
+    }
+    )
+    
+  }
+  
   if(usersLoaded) {
     return (
       <div className="App">
@@ -206,7 +212,7 @@ function displayTime(time) {
             </Route>
 
             <Route path="/show_carpools">
-                <ShowCarpools carpoolsAsDriver = {carpoolsAsDriver} displayDate = {displayDate} displayTime = {displayTime} />
+                <ShowCarpools loggedInUser = {loggedInUser} myCarpools = {myCarpools} displayDate = {displayDate} displayTime = {displayTime} />
             </Route>
 
             <Route path="/display_find_carpool_form">
@@ -214,7 +220,7 @@ function displayTime(time) {
             </Route>
 
             <Route path="/show_carpool_details/:id">
-                <CarpoolDetails displayDate = {displayDate} displayTime = {displayTime} />
+                <CarpoolDetails loggedInUser = {loggedInUser} myCarpools = {myCarpools} displayDate = {displayDate} displayTime = {displayTime} />
             </Route>
 
           </BrowserRouter>
@@ -224,7 +230,7 @@ function displayTime(time) {
                 <HomeScreen />
             </Route>
             <Route exact path="/login">
-                <LoginScreen users = {users} setLoggedIn = {setLoggedIn} setLoggedInUser = {setLoggedInUser} getCarpoolsAsDriver = {getCarpoolsAsDriver} />
+                <LoginScreen users = {users} setLoggedIn = {setLoggedIn} setLoggedInUser = {setLoggedInUser} myCarpools = {myCarpools} />
             </Route>
 
             <Route exact path="/register">

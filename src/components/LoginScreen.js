@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import StandardPageHeader from './StandardPageHeader';
 import { useHistory } from 'react-router-dom';
 
-function LoginScreen({users, setLoggedIn, setLoggedInUser, getCarpoolsAsDriver}) {
+function LoginScreen({users, setLoggedIn, setLoggedInUser, myCarpools }) {
     const history = useHistory();
     const [selectedUserId, setSelectedUserId] = useState(users[0].id)
    
@@ -15,7 +15,6 @@ function LoginScreen({users, setLoggedIn, setLoggedInUser, getCarpoolsAsDriver})
         const userInfo = users.find((user)=>user.id == selectedUserId); 
         setLoggedIn(true);
         setLoggedInUser(userInfo);
-        getCarpoolsAsDriver(selectedUserId)
         history.push("/")
     }
     
