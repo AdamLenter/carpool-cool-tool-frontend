@@ -146,6 +146,12 @@ function displayTime(time) {
         newCarpool.origin_location = locations.find((location) => location.id == newCarpool.origin_location_id);
         newCarpool.user_transactions = [];
         newCarpool.users = [];
+        newCarpool.driver_user = {...loggedInUser};
+
+        const updatedCarpoolsAsDriver = [...loggedInUser.carpools_as_driver, newCarpool];
+        let updatedLoggedInUser = {...loggedInUser};
+        updatedLoggedInUser.carpools_as_driver = updatedCarpoolsAsDriver;
+        setLoggedInUser(updatedLoggedInUser);
       })
   }
 

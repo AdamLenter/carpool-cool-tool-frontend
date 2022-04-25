@@ -9,7 +9,7 @@ function CarpoolDetails( { loggedInUser, myCarpools, displayDate, displayTime } 
     const [carpoolLoaded, setCarpoolLoaded] = useState(false);
 
     let carpoolToFind = {};
-    
+    console.log(loggedInUser.carpools_as_driver);
     if(!carpoolLoaded) {
         carpoolToFind = myCarpools.find((carpool) => carpool.id === params.id)
         if(carpoolToFind) {
