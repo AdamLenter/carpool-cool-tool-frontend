@@ -10,7 +10,7 @@ function NavBar( {setLoggedIn, setLoggedInUser} ) {
     function logout(){
         setLoggedIn(false);
         setLoggedInUser("");
-        history.push("./");
+        history.push("../");
     } 
     return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">

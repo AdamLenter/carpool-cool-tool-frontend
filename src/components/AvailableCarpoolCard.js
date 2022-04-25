@@ -7,7 +7,8 @@ function AvailableCarpoolCard({ carpoolInfo, loggedInUser, displayDate, displayT
     const history = useHistory();
     
     function handleJoinButton() {
-        addUserToCarpool(loggedInUser.id, carpoolInfo.id);
+        addUserToCarpool(loggedInUser, carpoolInfo);
+        history.push(`/show_carpool_details/${carpoolInfo.id}`);
     }
 
     return (

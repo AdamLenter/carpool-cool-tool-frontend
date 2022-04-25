@@ -95,7 +95,7 @@ function displayTime(time) {
         .then((r)=>r.json())
         .then((userList) => setUsers(userList))
         .then(()=>setUsersLoaded(true))
-        }, [])
+        }, [loggedInUser])
 
   useEffect(()=> {
     fetch("http://localhost:9292/cities")
@@ -149,15 +149,51 @@ function displayTime(time) {
       })
   }
 
-  function addUserToCarpool(userId, carpoolId) {
+  function addUserToCarpool(loggedInUser, carpoolInfo) {
+    // console.log(loggedInUser);
+    // console.log(carpoolInfo);
+    const newCarpoolGuestForDb = {
+      userId: loggedInUser.id,
+      carpoolId: carpoolInfo.id
+    }
     fetch("http://localhost:9292/carpool_guests", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
         },
-      body: JSON.stringify({userId, carpoolId})
+      body: JSON.stringify(newCarpoolGuestForDb)
       })
       .then((response)=>response.json())
+      .then((newCarpoolGuest)=> {
+        const newCarpoolGuests = [...carpoolInfo.carpool_guests, newCarpoolGuest];
+        const newCarpoolUser = {
+          id: loggedInUser.id, 
+          first_name: loggedInUser.first_name, 
+          last_name: loggedInUser.last_name, 
+          address1: loggedInUser.address1, 
+          address2: loggedInUser.address2, 
+          car_guest_capacity: loggedInUser.car_guest_capacity, 
+          cellphone_number: loggedInUser.cellphone_number, 
+          city_id: loggedInUser.city_id, 
+          has_car: loggedInUser.has_car, 
+          home_neighborhood_location_id: loggedInUser.home_neighborhood_location_id, 
+          home_neighborhood_location_id: loggedInUser.home_neighborhood_location_id, 
+          state: loggedInUser.state, 
+          username: loggedInUser.username, 
+          zip: loggedInUser.zip, 
+        };
+
+      const newCarpoolUsers = [...carpoolInfo.users, newCarpoolUser];
+
+      let newCarpoolInfo = {...carpoolInfo};
+      newCarpoolInfo.carpool_guests = newCarpoolGuests;
+      newCarpoolInfo.users = newCarpoolUsers;
+
+      const updatedUserCarpoolsAsGuest = [...loggedInUser.carpools_as_guest, newCarpoolInfo];
+      const updatedLoggedInUser = {...loggedInUser};
+      updatedLoggedInUser.carpools_as_guest = updatedUserCarpoolsAsGuest;
+      setLoggedInUser(updatedLoggedInUser);
+      })   
   }
   
   let neighborhoods = [];

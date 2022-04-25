@@ -33,7 +33,7 @@ function CarpoolDetails( { loggedInUser, myCarpools, displayDate, displayTime } 
                 <h1>Carpool Details</h1>
                 {carpoolInfo ? <CarpoolBasicInfo loggedInUser = {loggedInUser} carpoolInfo = {carpoolInfo} displayDate = {displayDate} displayTime = {displayTime} /> : <h2>No Carpool to Display</h2>}
                 <br />
-                <br />
+    
                 <strong>One-way cost: </strong>${carpoolInfo.one_way_cost.toFixed(2)}
                 <br />
                 

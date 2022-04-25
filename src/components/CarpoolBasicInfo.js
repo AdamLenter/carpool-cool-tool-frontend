@@ -1,7 +1,7 @@
 import React from 'react';
 
 function CarpoolBasicInfo({ loggedInUser, carpoolInfo, displayDate, displayTime }) {  
-    console.log(carpoolInfo);
+
     return (
         <div>
             <strong>Driver: </strong>{carpoolInfo.driver_user_id === loggedInUser.id ? "(self)" : carpoolInfo.driver_user.first_name.concat(" ", carpoolInfo.driver_user.last_name)}
