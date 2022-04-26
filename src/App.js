@@ -201,6 +201,40 @@ function displayTime(time) {
       setLoggedInUser(updatedLoggedInUser);
       })   
   }
+
+  function markCarpoolComplete(carpoolInfo) {
+    fetch(`http://localhost:9292/mark_carpool_complete/${carpoolInfo.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+        },
+      body: JSON.stringify({complete: "Yes"})
+      })
+
+    for(let i = 0; i < carpoolInfo.user_transactions.length; i++) {
+      fetch("http://localhost:9292/carpool_transactions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        },
+      body: JSON.stringify(carpoolInfo.user_transactions[i])
+      })
+    }
+
+    const updatedCarpoolsAsDriver = loggedInUser.carpools_as_driver.map((carpool)=>{
+        if(carpool.id === carpoolInfo.id) {
+          return carpoolInfo;
+        }
+        else {
+          return carpool;
+        }
+    }) 
+
+    let updatedLoggedInUser = {...loggedInUser}
+    updatedLoggedInUser.carpools_as_driver = updatedCarpoolsAsDriver;
+
+    setLoggedInUser(updatedLoggedInUser);
+  }
   
   let neighborhoods = [];
   
@@ -236,7 +270,6 @@ function displayTime(time) {
       }
     }
     )
-    
   }
   
   if(usersLoaded) {
@@ -262,7 +295,7 @@ function displayTime(time) {
             </Route>
 
             <Route path="/show_carpool_details/:id">
-                <CarpoolDetails loggedInUser = {loggedInUser} myCarpools = {myCarpools} displayDate = {displayDate} displayTime = {displayTime} />
+                <CarpoolDetails loggedInUser = {loggedInUser} myCarpools = {myCarpools} displayDate = {displayDate} displayTime = {displayTime} currentDate = {currentDate} markCarpoolComplete = {markCarpoolComplete} />
             </Route>
 
           </BrowserRouter>
