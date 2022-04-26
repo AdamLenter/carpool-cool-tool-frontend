@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import StandardPageHeader from './StandardPageHeader';
 import { useHistory } from 'react-router-dom';
 
-function LoginScreen({users, setLoggedIn, setLoggedInUser, myCarpools }) {
+function LoginScreen({users, setLoggedIn, setLoggedInUser, setUserTransactionHistory, myCarpools }) {
     const history = useHistory();
     const [selectedUserId, setSelectedUserId] = useState(users[0].id)
    
@@ -15,6 +15,11 @@ function LoginScreen({users, setLoggedIn, setLoggedInUser, myCarpools }) {
         const userInfo = users.find((user)=>user.id == selectedUserId); 
         setLoggedIn(true);
         setLoggedInUser(userInfo);
+        
+        fetch(`http://localhost:9292/user_transactions/${selectedUserId}`)
+            .then((r)=>r.json())
+            .then((userTransactions) => setUserTransactionHistory(userTransactions));
+            
         history.push("/")
     }
     

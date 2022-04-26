@@ -63,6 +63,16 @@ label, input {
   margin-right: auto;
 }
 
+Table {
+  margin: auto;
+  border: 1px solid #333;
+}
+
+td {
+  border: 1px solid #333;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -10,6 +10,7 @@ import CreatePool from './components/CreatePool';
 import ShowCarpools from './components/ShowCarpools';
 import CarpoolDetails from './components/CarpoolDetails';
 import FindCarpoolForm from './components/FindCarpoolForm';
+import TransactionHistory from './components/TransactionHistory';
 
 function App() {
   const today = new Date();
@@ -45,6 +46,8 @@ function App() {
   // state: "New York",
   // username: "aurelio",
   // zip: "78251"});
+
+  const [userTransactionHistory, setUserTransactionHistory] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState({});
   const [cities, setCities] = useState([]);
@@ -298,20 +301,24 @@ function displayTime(time) {
                 <CarpoolDetails loggedInUser = {loggedInUser} myCarpools = {myCarpools} displayDate = {displayDate} displayTime = {displayTime} currentDate = {currentDate} markCarpoolComplete = {markCarpoolComplete} />
             </Route>
 
+            <Route exact path="/transaction_history">
+              <TransactionHistory loggedInUser = {loggedInUser} userTransactionHistory = {userTransactionHistory} displayDate = {displayDate} />
+            </Route>
+
           </BrowserRouter>
         ) : (
           <BrowserRouter>
-            <Route exact path="/">
-                <HomeScreen />
-            </Route>
             <Route exact path="/login">
-                <LoginScreen users = {users} setLoggedIn = {setLoggedIn} setLoggedInUser = {setLoggedInUser} myCarpools = {myCarpools} />
+                <LoginScreen users = {users} setLoggedIn = {setLoggedIn} setLoggedInUser = {setLoggedInUser} setUserTransactionHistory = {setUserTransactionHistory} myCarpools = {myCarpools} />
             </Route>
 
             <Route exact path="/register">
               <RegistrationScreen cities = {cities} neighborhoods = {neighborhoods} addUser = {addUser}  />
             </Route>
-          
+
+            <Route exact path="/">
+                <HomeScreen />
+            </Route>          
           </BrowserRouter>
         )}
       </div>
