@@ -11,6 +11,7 @@ import ShowCarpools from './components/ShowCarpools';
 import CarpoolDetails from './components/CarpoolDetails';
 import FindCarpoolForm from './components/FindCarpoolForm';
 import TransactionHistory from './components/TransactionHistory';
+import MyProfile from './components/MyProfile';
 
 function App() {
   const today = new Date();
@@ -330,6 +331,10 @@ function displayTime(time) {
 
             <Route exact path="/transaction_history">
               <TransactionHistory loggedInUser = {loggedInUser} userTransactionHistory = {userTransactionHistory} userBankAccounts = {userBankAccounts} addBankTransaction = {addBankTransaction} displayDate = {displayDate} />
+            </Route>
+            
+            <Route exact path="/my_profile">
+              <MyProfile loggedInUser = {loggedInUser} neighborhoods = {neighborhoods} cities = {cities} />
             </Route>
 
           </BrowserRouter>
