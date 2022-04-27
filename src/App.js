@@ -336,7 +336,7 @@ function displayTime(time) {
             </Route>
             
             <Route exact path="/my_profile">
-              <MyProfile loggedInUser = {loggedInUser} neighborhoods = {neighborhoods} cities = {cities} />
+              <MyProfile loggedInUser = {loggedInUser} neighborhoods = {neighborhoods} cities = {cities} userBankAccounts = {userBankAccounts} />
             </Route>
 
           </BrowserRouter>

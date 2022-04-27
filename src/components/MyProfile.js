@@ -1,6 +1,7 @@
 import React from 'react';
+import BankAccountCard from './BankAccountCard';
 
-function MyProfile({ loggedInUser, neighborhoods, cities }) {
+function MyProfile({ loggedInUser, neighborhoods, cities, userBankAccounts }) {
 console.log(loggedInUser);
     return (
         <div>
@@ -38,6 +39,11 @@ console.log(loggedInUser);
 
                 <strong>Car guest capacity: </strong>{loggedInUser.car_guest_capacity ? loggedInUser.car_guest_capacity : "(N/A)"}
             </p>
+            <br />
+            <hr />
+            <br />
+            <h2>My Bank Accounts</h2>
+            {userBankAccounts.length > 0 ? userBankAccounts.map((account) => <BankAccountCard key = {account.id} accountInfo = {account} />) : <h3>(no bank accounts to display)</h3>}
         </div>
     )
 }
