@@ -47,12 +47,15 @@ function App() {
   // username: "aurelio",
   // zip: "78251"});
 
-  const [userTransactionHistory, setUserTransactionHistory] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState({});
+  
   const [cities, setCities] = useState([]);
   const [locations, setLocations] = useState([]);
   const [locationsSet, setLocationsSet] = useState(false);
+
+  const [userTransactionHistory, setUserTransactionHistory] = useState([]);
+  const [userBankAccounts, setUserBankAccounts] = useState([]);
 
   function displayDate(date, nameOrAbbreviation) {
     const months = [
@@ -238,6 +241,30 @@ function displayTime(time) {
 
     setLoggedInUser(updatedLoggedInUser);
   }
+
+  function addBankTransaction(transactionInfo) {
+    const transactionDetails = {
+      sender_user_id: transactionInfo.toFrom === "to" ? loggedInUser.id : null,
+      recipient_user_id: transactionInfo.toFrom === "from" ? loggedInUser.id : null,
+      transaction_amount: Number(transactionInfo.transactionAmount), 
+      bank_account_id: Number(transactionInfo.bankAccount), 
+      user_transaction_date: currentDate
+    }
+
+    fetch("http://localhost:9292/bank_transaction", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        },
+      body: JSON.stringify(transactionDetails)
+      })
+      .then((response)=>response.json())
+      .then((transactionInfoFromDb)=> {
+        transactionInfoFromDb.bank_account = userBankAccounts.find((bankAccount)=>bankAccount.id === transactionDetails.bank_account_id);
+        const updatedTransactionHistory = [...userTransactionHistory, transactionInfoFromDb];
+        setUserTransactionHistory(updatedTransactionHistory);
+      })
+  }
   
   let neighborhoods = [];
   
@@ -274,7 +301,7 @@ function displayTime(time) {
     }
     )
   }
-  
+
   if(usersLoaded) {
     return (
       <div className="App">
@@ -302,14 +329,14 @@ function displayTime(time) {
             </Route>
 
             <Route exact path="/transaction_history">
-              <TransactionHistory loggedInUser = {loggedInUser} userTransactionHistory = {userTransactionHistory} displayDate = {displayDate} />
+              <TransactionHistory loggedInUser = {loggedInUser} userTransactionHistory = {userTransactionHistory} userBankAccounts = {userBankAccounts} addBankTransaction = {addBankTransaction} displayDate = {displayDate} />
             </Route>
 
           </BrowserRouter>
         ) : (
           <BrowserRouter>
             <Route exact path="/login">
-                <LoginScreen users = {users} setLoggedIn = {setLoggedIn} setLoggedInUser = {setLoggedInUser} setUserTransactionHistory = {setUserTransactionHistory} myCarpools = {myCarpools} />
+                <LoginScreen users = {users} setLoggedIn = {setLoggedIn} setLoggedInUser = {setLoggedInUser} setUserTransactionHistory = {setUserTransactionHistory} setUserBankAccounts = {setUserBankAccounts} />
             </Route>
 
             <Route exact path="/register">
@@ -330,4 +357,5 @@ function displayTime(time) {
     )
   }
 }
+
 export default App;

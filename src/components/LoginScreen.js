@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import StandardPageHeader from './StandardPageHeader';
 import { useHistory } from 'react-router-dom';
 
-function LoginScreen({users, setLoggedIn, setLoggedInUser, setUserTransactionHistory, myCarpools }) {
+function LoginScreen({users, setLoggedIn, setLoggedInUser, setUserTransactionHistory, setUserBankAccounts }) {
     const history = useHistory();
     const [selectedUserId, setSelectedUserId] = useState(users[0].id)
    
@@ -19,6 +19,10 @@ function LoginScreen({users, setLoggedIn, setLoggedInUser, setUserTransactionHis
         fetch(`http://localhost:9292/user_transactions/${selectedUserId}`)
             .then((r)=>r.json())
             .then((userTransactions) => setUserTransactionHistory(userTransactions));
+
+        fetch(`http://localhost:9292/bank_accounts/${selectedUserId}`)
+            .then((r)=>r.json())
+            .then((bankAccounts) => setUserBankAccounts(bankAccounts));
             
         history.push("/")
     }

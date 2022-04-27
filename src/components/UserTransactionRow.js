@@ -9,12 +9,12 @@ function UserTransactionRow({ loggedInUser, transaction, displayDate }) {
 
     if(transaction.sender_user_id === loggedInUser.id) {
         transactionToFrom = "To: ";
-        senderRecipient = `${transaction.recipient_user.first_name} ${transaction.recipient_user.last_name}`;
+        senderRecipient = transaction.recipient_user ? `${transaction.recipient_user.first_name} ${transaction.recipient_user.last_name}` : transaction.bank_account ? `(${transaction.bank_account.bank_name})` : "(loading)";
         outflowAmount = `-$${transaction.transaction_amount.toFixed(2)}`
     }
     else {
         transactionToFrom = "From: ";
-        senderRecipient = `${transaction.sender_user.first_name} ${transaction.sender_user.last_name}`;
+        senderRecipient = transaction.sender_user ? `${transaction.sender_user.first_name} ${transaction.sender_user.last_name}` : transaction.bank_account ? `(${transaction.bank_account.bank_name})` : "(loading)";
         inflowAmount = `+$${transaction.transaction_amount.toFixed(2)}`
     }
 

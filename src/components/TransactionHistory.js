@@ -1,12 +1,13 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import TransferFundsForm from './TransferFundsForm';
 import UserTransactionRow from './UserTransactionRow';
 
-function TransactionHistory({ loggedInUser, userTransactionHistory, displayDate }) {
+function TransactionHistory({ loggedInUser, userTransactionHistory, userBankAccounts, displayDate, addBankTransaction }) {
     console.log(userTransactionHistory);
    
     let sortedTransactions = userTransactionHistory.sort((a, b) => {
-        if(a.user_transaction_date < b.user_transaction_date) {
+        if(a.id > b.id) {
             return -1;
         }
         else {
@@ -48,6 +49,8 @@ function TransactionHistory({ loggedInUser, userTransactionHistory, displayDate 
                         </tr>)}
                 </tbody>
             </Table>
+
+            {userBankAccounts.length > 0 ? <TransferFundsForm userBankAccounts = {userBankAccounts} addBankTransaction = {addBankTransaction} /> : null}
         </div>
     )
 }
