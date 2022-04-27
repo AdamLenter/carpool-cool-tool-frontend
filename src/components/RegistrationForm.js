@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import StandardPageHeader from './StandardPageHeader';
 
 function RegistrationForm({cities, neighborhoods, addUser, setRegistrationComplete}) {
 
@@ -46,7 +45,7 @@ function RegistrationForm({cities, neighborhoods, addUser, setRegistrationComple
                 recordForDB[keys[i]] = formData[keys[i]];
             }
         }
-        if(recordForDB.hasCar == "no") {
+        if(recordForDB.hasCar === "no") {
             recordForDB.carGuestCapacity = 0;
         }
         
@@ -54,7 +53,7 @@ function RegistrationForm({cities, neighborhoods, addUser, setRegistrationComple
        setRegistrationComplete(true);
     }
 
-    const displayedNeighborhoods = neighborhoods.filter((neighborhood)=>neighborhood.city_id == formData.cityId);
+    const displayedNeighborhoods = neighborhoods.filter((neighborhood)=>neighborhood.city_id === Number(formData.cityId));
 
     return (
         <div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CarpoolBasicInfo from './CarpoolBasicInfo';
 import CarpoolGuestList from './CarpoolGuestList';

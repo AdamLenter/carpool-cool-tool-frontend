@@ -74,9 +74,9 @@ function App() {
         {"number": "12", "name": "December",  "abbreviation": "Dec"}
     ];
 
-    const monthInfo = months.find((month) => month.number == date.substring(5, 7));
+    const monthInfo = months.find((month) => month.number === date.substring(5, 7));
     
-    if(nameOrAbbreviation == "name") {
+    if(nameOrAbbreviation === "name") {
         return `${monthInfo.name}  ${Number(date.substring(8))}, ${date.substring(0, 4)}`;
     }
     else {
@@ -116,7 +116,7 @@ function displayTime(time) {
         )}, [])
 
   function addUser(newUserInfo) {
-    if(newUserInfo['address2'] == "")
+    if(newUserInfo['address2'] === "")
       {
       newUserInfo['address2'] = null;
       }
@@ -132,9 +132,12 @@ function displayTime(time) {
       body: JSON.stringify(newUserInfo)
       })
       .then((response)=>response.json())
-
-      const newUserList = [...users, newUserInfo];
+      .then((newUserFromDb) => {
+        newUserFromDb.carpools_as_driver = [];
+        newUserFromDb.carpools_as_guest = [];
+        const newUserList = [...users, newUserFromDb];
       setUsers(newUserList);
+      })
   }
 
   function addCarpool(carpoolInfo) {
@@ -149,8 +152,8 @@ function displayTime(time) {
       .then((responseInfo)=> {
         let newCarpool = responseInfo;
         newCarpool.carpool_guests = [];
-        newCarpool.destination_location = locations.find((location) => location.id == newCarpool.destination_location_id);
-        newCarpool.origin_location = locations.find((location) => location.id == newCarpool.origin_location_id);
+        newCarpool.destination_location = locations.find((location) => location.id === Number(newCarpool.destination_location_id));
+        newCarpool.origin_location = locations.find((location) => location.id === Number(newCarpool.origin_location_id));
         newCarpool.user_transactions = [];
         newCarpool.users = [];
         newCarpool.driver_user = {...loggedInUser};
@@ -189,7 +192,6 @@ function displayTime(time) {
           cellphone_number: loggedInUser.cellphone_number, 
           city_id: loggedInUser.city_id, 
           has_car: loggedInUser.has_car, 
-          home_neighborhood_location_id: loggedInUser.home_neighborhood_location_id, 
           home_neighborhood_location_id: loggedInUser.home_neighborhood_location_id, 
           state: loggedInUser.state, 
           username: loggedInUser.username, 
