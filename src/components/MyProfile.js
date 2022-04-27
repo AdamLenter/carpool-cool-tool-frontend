@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState }from 'react';
 import BankAccountCard from './BankAccountCard';
 
-function MyProfile({ loggedInUser, neighborhoods, cities, userBankAccounts }) {
-console.log(loggedInUser);
+function MyProfile({ loggedInUser, neighborhoods, cities, userBankAccounts, addBankAccount }) {
+
+    const defaultFormData = {
+        bank_name: "", 
+        account_number: ""
+    };
+
+    const [formData, setFormData] = useState(defaultFormData);
+
+    function handleFormData(event) {
+        let newFormData = {...formData};
+        newFormData[event.target.name] = event.target.value;
+        setFormData(newFormData);
+    }
+
+    function handleAddBankForm(event) {
+        event.preventDefault();
+        addBankAccount(formData);
+        setFormData(defaultFormData);
+    }
+    
     return (
         <div>
             <h1>My Profile</h1>
@@ -44,6 +63,21 @@ console.log(loggedInUser);
             <br />
             <h2>My Bank Accounts</h2>
             {userBankAccounts.length > 0 ? userBankAccounts.map((account) => <BankAccountCard key = {account.id} accountInfo = {account} />) : <h3>(no bank accounts to display)</h3>}
+            <br />
+            <br />
+
+            <h2>Add a new Bank Account</h2>
+            <form onSubmit = {handleAddBankForm}>
+                <label>Bank name: </label>
+                <input name = 'bank_name' value = {formData.bank_name} onChange = {handleFormData}/>
+                <br />
+
+                <label>Account number: </label>
+                <input name = 'account_number' value = {formData.account_number} onChange = {handleFormData} />
+                <br />
+
+                <button className = 'app_buttons'>Submit</button>
+            </form>
         </div>
     )
 }

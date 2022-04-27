@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 function LoginScreen({users, setLoggedIn, setLoggedInUser, setUserTransactionHistory, setUserBankAccounts }) {
     const history = useHistory();
     const [selectedUserId, setSelectedUserId] = useState(users[0].id)
-    console.log(users[users.length - 1]);
    
     function handle_user_select(event) {
         setSelectedUserId(event.target.value)

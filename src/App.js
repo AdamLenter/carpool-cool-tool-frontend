@@ -140,6 +140,23 @@ function displayTime(time) {
       })
   }
 
+  function addBankAccount(bankAccountInfo) {
+    bankAccountInfo.user_id = loggedInUser.id;
+
+    fetch("http://localhost:9292/bank_account", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        },
+      body: JSON.stringify(bankAccountInfo)
+      })
+      .then((response)=>response.json())
+      .then((newBankAccountFromDb) => {
+        const updatedBankAccounts = [...userBankAccounts, newBankAccountFromDb];
+        setUserBankAccounts(updatedBankAccounts);
+      })
+  }
+
   function addCarpool(carpoolInfo) {
     fetch("http://localhost:9292/carpools", {
       method: "POST",
@@ -336,7 +353,7 @@ function displayTime(time) {
             </Route>
             
             <Route exact path="/my_profile">
-              <MyProfile loggedInUser = {loggedInUser} neighborhoods = {neighborhoods} cities = {cities} userBankAccounts = {userBankAccounts} />
+              <MyProfile loggedInUser = {loggedInUser} neighborhoods = {neighborhoods} cities = {cities} userBankAccounts = {userBankAccounts} addBankAccount = {addBankAccount} />
             </Route>
 
           </BrowserRouter>
