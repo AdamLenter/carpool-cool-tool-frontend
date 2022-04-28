@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Carpool Cool Tool
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+Over the past few years, ride sharing has exploded in growth. Typically when we talk about ride sharing, we are referring to a service like Uber or Lyft where a user essentially hails a taxi by means of an app. There are other versions, such as UberX, where one driver will pick up multiple passengers and driver them to their destination. But in both of these models, customers hire independent contractors to drive them someplace.
+But perhaps there should be a differnt model, in which multiple who are going to the same place anyway share in the cost of a single ride. That is the aim of Carpool Cool Tool.
 
-## Available Scripts
+## Technologies
+The system uses a React frontend connected to a backend running SQLite with Active Record through Sinatra.
 
-In the project directory, you can run:
+## File Structure - Backend
+As a Sinatra application, follows an MVC framework.
 
-### `npm start`
+Controllers - The application controller file defines how the application handles requests  made by the frontend.
+models - contains one model file for each database table (class), which defines its relationships with the other tables. 
+db - Contains the SQLite database, along with the migrations used to create and tweak it.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## File Structure - Frontend
+app.js - The main screen. It contains many of the fetch requests and update functions as well as all of the route paths 
 
-### `npm test`
+components - All of the system screens are contained in the components directory.
+    
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
+This is a demo system. It was seeded with a cominbation of random data from Faker and some data based on actual places around New York City and Long Island.
 
-### `npm run build`
+To use the system, from the home screen, click the Register button. There you will be asked to enter your basic information. It asks for your home neighborhood, which acts as default for setting up or searching for carpools. Similarly, if you have a car and will be a driver, you can enter the appropriate capacity of your car for creating carpools.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once you have registered, you can login to the system. Because this is only a demo, you can log in as any system user from a drop-down menu without a password.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Each user can connect a bank account to their account in this system. To do that, go to the My Profile screen and enter your bank account information. *** This is a demo system. Please DO NOT enter actual bank account information. ***
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Once in the system, you can create a carpool by going to the Create a pool link and entering the details. When creating a carpool, it asks for the total one-way price to park. Suppose you are creating a carpool to go to a train station and that it will cost $8.00 to park there. The total one-way cost should be $4.00. That is because presumably, you will also create a carpool for the return trip. So the total cost should be shared by both groups.
 
-### `npm run eject`
+To find a carpool, click on the appropriate link and entered your desired origin, destination, and departure time. Any available carpools will be displayed within 30 minutes of your departure time. To join a carpool, simply click the "join carpool" button.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+For each carpool, the cost is divided by the total number of people in the car. So if the one-way cost is $4.00 and there are 3 passengers (plus the driver), each passenger will pay the driver $1.00. At the end of the trip, the driver can press the "Mark carpool as complete" button and the per passenger price of the trip will automatically be transferred from each passenger's account to the driver.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Users can "transfer" money between their Carpool Cool Tool account and their bank account from the Transacation History screen.
