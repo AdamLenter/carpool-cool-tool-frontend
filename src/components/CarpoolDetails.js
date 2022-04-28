@@ -9,7 +9,7 @@ function CarpoolDetails( { loggedInUser, myCarpools, displayDate, displayTime, c
     const [carpoolLoaded, setCarpoolLoaded] = useState(false);
 
     let carpoolToFind = {};
-    
+    console.log(carpoolInfo.carpool_complete)
     if(!carpoolLoaded) {
         carpoolToFind = myCarpools.find((carpool) => carpool.id === params.id)
         if(carpoolToFind) {
@@ -73,7 +73,7 @@ function CarpoolDetails( { loggedInUser, myCarpools, displayDate, displayTime, c
 
                 {carpoolInfo.users.length > 0 ? <CarpoolGuestList carpoolGuests = {carpoolInfo.carpool_guests} carpoolGuestUsers = {carpoolInfo.users} userTransactions = {carpoolInfo.user_transactions} displayDate = {displayDate} /> : null}
 
-                {currentDate >= carpoolInfo.carpool_date && carpoolInfo.driver_user_id === loggedInUser.id && carpoolInfo.carpool_complete === "No" && carpoolInfo.users.length > 0 ? (<div><button className = "app_buttons" onClick = {handleMarkCarpoolComplete}>Mark Carpool Complete</button></div>) : null}
+                {currentDate >= carpoolInfo.carpool_date && carpoolInfo.driver_user_id === loggedInUser.id && !carpoolInfo.carpool_complete && carpoolInfo.users.length > 0 ? (<div><button className = "app_buttons" onClick = {handleMarkCarpoolComplete}>Mark Carpool Complete</button></div>) : null}
             </div>
         )
         }
