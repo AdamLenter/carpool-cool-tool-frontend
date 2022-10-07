@@ -1,3 +1,4 @@
+![alt text](/src/carpool_photo.jpg`)
 # Carpool Cool Tool
 
 ## Overview
@@ -7,7 +8,8 @@ But perhaps there should be a differnt model, in which multiple who are going to
 ## Technologies
 The system uses a React frontend connected to a backend running SQLite with Active Record through Sinatra.
 
-## File Structure - Backend
+## File Structure
+### Backend
 As a Sinatra application, follows an MVC framework.
 
 Controllers - The application controller file defines how the application handles requests  made by the frontend.
@@ -15,7 +17,7 @@ models - contains one model file for each database table (class), which defines 
 db - Contains the SQLite database, along with the migrations used to create and tweak it.
 
 
-## File Structure - Frontend
+### Frontend
 app.js - The main screen. It contains many of the fetch requests and update functions as well as all of the route paths 
 
 components - All of the system screens are contained in the components directory.
