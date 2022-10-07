@@ -1,4 +1,4 @@
-![alt text](/src/carpool_photo.jpg`)
+![Alt text](/src/carpool_photo.jpg "Carpools rule!")
 # Carpool Cool Tool
 
 ## Overview
