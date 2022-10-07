@@ -20,9 +20,11 @@ app.js - The main screen. It contains many of the fetch requests and update func
 
 components - All of the system screens are contained in the components directory.
     
-
+## Setup
+From the phase-3-project_backend directory, enter the command: bundle exec rake server
+From the phase-3-project-frontend directory, enter the command: npm start
 ## Usage
-This is a demo system. It was seeded with a cominbation of random data from Faker and some data based on actual places around New York City and Long Island.
+This is a demo system. It was seeded with a combination of random data from Faker and some data based on actual places around New York City and Long Island.
 
 To use the system, from the home screen, click the Register button. There you will be asked to enter your basic information. It asks for your home neighborhood, which acts as default for setting up or searching for carpools. Similarly, if you have a car and will be a driver, you can enter the appropriate capacity of your car for creating carpools.
 
@@ -36,4 +38,4 @@ To find a carpool, click on the appropriate link and entered your desired origin
 
 For each carpool, the cost is divided by the total number of people in the car. So if the one-way cost is $4.00 and there are 3 passengers (plus the driver), each passenger will pay the driver $1.00. At the end of the trip, the driver can press the "Mark carpool as complete" button and the per passenger price of the trip will automatically be transferred from each passenger's account to the driver.
 
-Users can "transfer" money between their Carpool Cool Tool account and their bank account from the Transacation History screen.
+Users can "transfer" money between their Carpool Cool Tool account and their bank account from the Transaction History screen.
