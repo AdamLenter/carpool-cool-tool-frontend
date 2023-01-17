@@ -33,7 +33,7 @@ function LoginScreen({users, setLoggedIn, setLoggedInUser, setUserTransactionHis
         <form onSubmit = {handle_submit}>
             <label>Username: </label>
             <select value = {selectedUserId} onChange={handle_user_select}>
-                {users.map((user) => <option key = {user.id} value = {user.id}>{user.username}</option>)}
+                {users.map((user) => <option key = {user.id} value = {user.id}>{user.first_name} {user.last_name}</option>)}
             </select>
             <br />
             <button>Login</button>
