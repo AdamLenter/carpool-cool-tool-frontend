@@ -29,20 +29,6 @@ function App() {
 
   const [users, setUsers] = useState([]);
   const [usersLoaded, setUsersLoaded] = useState(false);
-  // const [loggedInUser, setLoggedInUser] = useState({address1: "4245 Wisozk Roads", 
-  // address2: null,
-  // car_guest_capacity: null,
-  // cellphone_number: "1-471-112-6266",
-  // city_id: 4,
-  // first_name: "Elijah",
-  // has_car: "no",
-  // home_neighborhood_location_id: 21,
-  // id: 1,
-  // last_name: "Toy",
-  // state: "New York",
-  // username: "aurelio",
-  // zip: "78251"});
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState({});
   
