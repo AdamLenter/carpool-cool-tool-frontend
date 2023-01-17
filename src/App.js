@@ -15,7 +15,7 @@ import MyProfile from './components/MyProfile';
 
 function App() {
   let today = new Date();
-
+  
   today.setTime(today.getTime() + (60 * 60 * 1000))
   
   const currentDate = today.toISOString().split('T')[0];
@@ -88,13 +88,13 @@ function displayTime(time) {
   useEffect(()=> {
     fetch("http://localhost:9292/cities")
         .then((r)=>r.json())
-        .then((cityList) => setCities(cityList))
-        .then (
-          fetch("http://localhost:9292/locations")
-          .then((r)=>r.json())
-          .then((locationList) => setLocations(locationList))
-          .then(() => setLocationsSet(true))
-        )}, [])
+        .then((cityList) => setCities(cityList));
+
+    fetch("http://localhost:9292/locations")
+        .then((r)=>r.json())
+        .then((locationList) => setLocations(locationList))
+        .then(() => setLocationsSet(true))
+        }, []);
 
   function addUser(newUserInfo) {
     if(newUserInfo['address2'] === "")
