@@ -14,17 +14,12 @@ import TransactionHistory from './components/TransactionHistory';
 import MyProfile from './components/MyProfile';
 
 function App() {
-  const today = new Date();
+  let today = new Date();
 
+  today.setTime(today.getTime() + (60 * 60 * 1000))
+  
   const currentDate = today.toISOString().split('T')[0];
   let currentHour = today.getHours();
-
-  if(currentHour < 23) {
-      currentHour += 1;
-  }
-  else {
-      currentHour = 0;
-  }
 
   if(currentHour < 10) {
       currentHour = "0" + currentHour;
